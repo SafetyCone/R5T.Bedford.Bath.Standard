@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using R5T.Bath.Standard;
+using R5T.Dacia;
 
 
 namespace R5T.Bedford.Bath.Standard
@@ -14,12 +15,18 @@ namespace R5T.Bedford.Bath.Standard
         /// </summary>
         public static IServiceCollection AddBinaryFileEqualityComparer(this IServiceCollection services)
         {
-            services
-                .AddSingleton<IFileEqualityComparer, BinaryFileEqualityComparer>()
-                .AddHumanOutput()
-                ;
+            services.AddBathBinaryFileEqualityComparer(services.AddHumanOutputAction());
 
             return services;
+        }
+
+        /// <summary>
+        /// Adds the binary-based <see cref="IFileEqualityComparer"/> service.
+        /// </summary>
+        public static ServiceAction<IFileEqualityComparer> AddBinaryFileEqualityComparerAction(this IServiceCollection services)
+        {
+            var serviceAction = new ServiceAction<IFileEqualityComparer>(() => services.AddBinaryFileEqualityComparer());
+            return serviceAction;
         }
 
         /// <summary>
@@ -27,12 +34,18 @@ namespace R5T.Bedford.Bath.Standard
         /// </summary>
         public static IServiceCollection AddTextFileEqualityComparer(this IServiceCollection services)
         {
-            services
-                .AddSingleton<IFileEqualityComparer, TextFileEqualityComparer>()
-                .AddHumanOutput()
-                ;
+            services.AddBathTextFileEqualityComparer(services.AddHumanOutputAction());
 
             return services;
+        }
+
+        /// <summary>
+        /// Adds the text-based <see cref="IFileEqualityComparer"/> service.
+        /// </summary>
+        public static ServiceAction<IFileEqualityComparer> AddTextFileEqualityComparerAction(this IServiceCollection services)
+        {
+            var serviceAction = new ServiceAction<IFileEqualityComparer>(() => services.AddTextFileEqualityComparer());
+            return serviceAction;
         }
     }
 }
