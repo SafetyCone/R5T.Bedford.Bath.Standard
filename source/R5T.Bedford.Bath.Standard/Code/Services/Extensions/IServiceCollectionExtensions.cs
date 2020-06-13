@@ -23,9 +23,9 @@ namespace R5T.Bedford.Bath.Standard
         /// <summary>
         /// Adds the binary-based <see cref="IFileEqualityComparer"/> service.
         /// </summary>
-        public static ServiceAction<IFileEqualityComparer> AddBinaryFileEqualityComparerAction(this IServiceCollection services)
+        public static IServiceAction<IFileEqualityComparer> AddBinaryFileEqualityComparerAction(this IServiceCollection services)
         {
-            var serviceAction = new ServiceAction<IFileEqualityComparer>(() => services.AddBinaryFileEqualityComparer());
+            var serviceAction = ServiceAction<IFileEqualityComparer>.New(() => services.AddBinaryFileEqualityComparer());
             return serviceAction;
         }
 
@@ -42,9 +42,9 @@ namespace R5T.Bedford.Bath.Standard
         /// <summary>
         /// Adds the text-based <see cref="IFileEqualityComparer"/> service.
         /// </summary>
-        public static ServiceAction<IFileEqualityComparer> AddTextFileEqualityComparerAction(this IServiceCollection services)
+        public static IServiceAction<IFileEqualityComparer> AddTextFileEqualityComparerAction(this IServiceCollection services)
         {
-            var serviceAction = new ServiceAction<IFileEqualityComparer>(() => services.AddTextFileEqualityComparer());
+            var serviceAction = ServiceAction<IFileEqualityComparer>.New(() => services.AddTextFileEqualityComparer());
             return serviceAction;
         }
     }
